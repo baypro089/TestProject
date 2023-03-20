@@ -7,12 +7,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.*;
 import org.jdesktop.swingx.prompt.PromptSupport;
 
-import com.magaki.SliderBanner.ImageSliderPanel;
 import com.magaki.mainFrame.MainFrame;
 import com.magaki.roundComponent.RoundedBorderBtn;
 import com.magaki.roundComponent.RoundedBorderPasswordField;
