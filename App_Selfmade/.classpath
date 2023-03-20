@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="Library-Java/swingx-painters-1.6.5-1.jar"/>
 	<classpathentry kind="lib" path="Library-Java/swingx-plaf-1.6.5-1.jar"/>
 	<classpathentry kind="lib" path="Library-Java/timingframework-swing-5.5.0.jar"/>
+	<classpathentry kind="lib" path="Library-Java/miglayout-4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
