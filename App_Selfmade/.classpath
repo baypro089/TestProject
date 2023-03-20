@@ -6,17 +6,15 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Library-Java/jtds-1.3.1.jar"/>
-	<classpathentry kind="lib" path="Library-Java/sqljdbc41.jar"/>
-	<classpathentry kind="lib" path="Library-Java/sqljdbc42.jar"/>
-	<classpathentry kind="lib" path="Library-Java/swingx-action-1.6.5-1.jar"/>
-	<classpathentry kind="lib" path="Library-Java/swingx-autocomplete-1.6.5-1.jar"/>
-	<classpathentry kind="lib" path="Library-Java/swingx-common-1.6.5-1.jar"/>
-	<classpathentry kind="lib" path="Library-Java/swingx-core-1.6.5-1.jar"/>
-	<classpathentry kind="lib" path="Library-Java/swingx-graphics-1.6.5-1.jar"/>
-	<classpathentry kind="lib" path="Library-Java/swingx-painters-1.6.5-1.jar"/>
-	<classpathentry kind="lib" path="Library-Java/swingx-plaf-1.6.5-1.jar"/>
-	<classpathentry kind="lib" path="Library-Java/timingframework-swing-5.5.0.jar"/>
-	<classpathentry kind="lib" path="Library-Java/miglayout-4.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/swingx-action-1.6.5-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/swingx-autocomplete-1.6.5-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/swingx-common-1.6.5-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/swingx-core-1.6.5-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/swingx-graphics-1.6.5-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/swingx-painters-1.6.5-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/swingx-plaf-1.6.5-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/jtds-1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/sqljdbc41.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Magaki/git/TestProject/App_Selfmade/jar_files/sqljdbc42.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
