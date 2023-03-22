@@ -1,44 +1,55 @@
 package com.magaki.mainFrame;
 
 public class Orders {
-	private String name;
-	private int amount;
-	private String unit;
-	private long price;
+	private String id;
+	private String status;
+	private String date;
+	private long totalPrice;
 	
-	public Orders(String name, int amount, String unit, long price) {
-		this.name = name;
-		this.amount = amount;
-		this.unit = unit;
-		this.price = price;
+	public Orders(String id, String status, String date, long totalPrice) {
+		super();
+		this.id = id;
+		this.status = status;
+		this.date = date;
+		this.totalPrice = totalPrice;
 	}
+	
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
-	public String getName() {
-		return name;
+
+	public String getId() {
+		return id;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setId(String id) {
+		this.id = id;
 	}
-	public int getAmount() {
-		return amount;
+
+	public String getStatus() {
+		return status;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	public String getUnit() {
-		return unit;
+
+	public String getDate() {
+		return date;
 	}
-	public void setUnit(String unit) {
-		this.unit = unit;
+
+	public void setDate(String date) {
+		this.date = date;
 	}
-	public long getPrice() {
-		return price;
+
+	public long getTotalPrice() {
+		return totalPrice;
 	}
-	public void setPrice(long price) {
-		this.price = price;
+
+	public void setTotalPrice(long totalPrice) {
+		this.totalPrice = totalPrice;
 	}
+	
 	
 
 }

@@ -13,7 +13,7 @@ public class SQLServerConnUtils_JTDS {
          throws SQLException, ClassNotFoundException {
      String hostName = "localhost";
      String sqlInstanceName = "MSSQLSERVER";
-     String database = "SQLExample";
+     String database = "quancom";
      String userName = "sa";
      String password = "gametop113";
 
@@ -53,6 +53,6 @@ public class SQLServerConnUtils_JTDS {
         }else{
             System.out.println("That bai");
         }
- }
+ 	}
 }
 

@@ -128,8 +128,8 @@ public class LeftMenu_cach2 extends JPanel implements ActionListener, MouseListe
 				container.revalidate();
 			}
 			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equalsIgnoreCase("Functionality2")) {
-				JPanel products = new ProductsPanel();
-				container.add(products, BorderLayout.CENTER);
+				JPanel supliers = new SuplierPanel();
+				container.add(supliers, BorderLayout.CENTER);
 				container.revalidate();
 			}
 		}	

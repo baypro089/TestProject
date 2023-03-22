@@ -128,7 +128,7 @@ public class OrdersPanel extends JPanel{
 		table.setDefaultRenderer(Object.class, new CenterTableCellRenderer());
 		scrollPane.setViewportView(table);
 		
-		SLQquery();
+		//SLQquery();
 	}
 	private void showResult() {
 		
@@ -139,7 +139,7 @@ public class OrdersPanel extends JPanel{
 		
 		
 	}
-	private void SLQquery() {
+	/*private void SLQquery() {
 		try ( // Lấy ra đối tượng Connection kết nối vào DB.
 	          Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection()) {
 	          // Tạo đối tượng Statement.
@@ -163,7 +163,6 @@ public class OrdersPanel extends JPanel{
 	      } catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
-}
