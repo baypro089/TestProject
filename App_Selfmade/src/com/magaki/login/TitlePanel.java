@@ -106,5 +106,7 @@ public class TitlePanel extends JPanel{
             }
         });
 	}
-
+	public static void main(String[] args) {
+		new Login();
+	}
 }

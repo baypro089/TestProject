@@ -37,7 +37,6 @@ public class SuplierPanel extends JPanel {
 	private JTextField nameTxt;
 	private JTextField addressTxt;
 	DefaultTableModel model;
-	private List<Suplier> list;
 	private JTable table;
 	/**
 	 * Create the panel.
@@ -48,7 +47,7 @@ public class SuplierPanel extends JPanel {
 	private void init() {
 		this.setPreferredSize(new Dimension(1030, 700));
 		setLayout(null);
-		list = new ArrayList<Suplier>();
+		ArrayList<Suplier> list = addListFormSQL();
 		JLabel titleLabel = new JLabel("NHÀ CUNG CẤP");
 		titleLabel.setFont(new Font("Arial", Font.PLAIN, 15));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -87,7 +86,6 @@ public class SuplierPanel extends JPanel {
 				o.setName(nameTxt.getText());
 				o.setAddress(addressTxt.getText());
 				list.add(o);
-				showResult();
 			}
 		});	
 		submitBtn.setBounds(28, 313, 89, 23);
@@ -108,10 +106,10 @@ public class SuplierPanel extends JPanel {
 		table.setDefaultRenderer(Object.class, new CenterTableCellRenderer());
 		scrollPane.setViewportView(table);
 		
-		importTableFromSQL();
+		showTable();
 	}
-	public void showResult() {
-		Suplier a = list.get(list.size()-1);
+	public void showTable() {
+		/*Suplier a = list.get(list.size()-1);
 		model.addRow(new Object[] {
 			a.getId(), a.getName(), a.getAddress()
 		});
@@ -129,9 +127,16 @@ public class SuplierPanel extends JPanel {
 	      } catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}	*/
+		ArrayList<Suplier> list = addListFormSQL();
+		for(Suplier i : list) {
+			model.addRow(new Object[] {
+				i.getId(), i.getName(), i.getAddress()
+			});
+		}
 	}
-	public void importTableFromSQL() {
+	public ArrayList<Suplier> addListFormSQL() {
+		ArrayList<Suplier> list = new ArrayList<>();                     
 		try (Connection connection = SQLServerConnUtils_JTDS.getSQLServerConnection()) {
 		          // Tạo đối tượng Statement.
 		          Statement statement = connection.createStatement();
@@ -144,16 +149,29 @@ public class SuplierPanel extends JPanel {
 		              String supId = rs.getString(1);
 		              String supName = rs.getString(2);
 		              String supAddress = rs.getString(3);
-		              model.addRow(new Object[] {
-		            		  supId, supName, supAddress
-		          	  });
+		              Suplier suplier = new Suplier(supId, supName, supAddress);
+		              list.add(suplier);
 		          }
 		          // Đóng kết nối
 		          connection.close();
 		      } catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+		}
+		return list;
+	}
+	public void executeSQL(String sql, String functionality) {
+		Connection connection;
+		try {
+			connection = SQLServerConnUtils_JTDS.getSQLServerConnection();
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 		
 }
