@@ -84,7 +84,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 		findLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
 		findLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel findNameProduct = new JLabel("Tên món");
+		JLabel findNameProduct = new JLabel("Tìm...");
 		findNameProduct.setBounds(160, 10, 73, 30);
 		category.add(findNameProduct);
 		findNameProduct.setFont(new Font("Arial", Font.BOLD, 13));
