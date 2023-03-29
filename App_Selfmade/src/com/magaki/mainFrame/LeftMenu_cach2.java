@@ -7,7 +7,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
+import com.magaki.mainFrame.Orders_OrderDetail.CheckboxRenderer;
 import com.magaki.roundComponent.RoundedBorderBtn;
 
 
@@ -28,6 +31,8 @@ public class LeftMenu_cach2 extends JPanel implements ActionListener, MouseListe
 	private int w = 230, h = 50;
 	private JPanel leftMenu;
 	private JPanel container;
+	JPanel orders;
+	JPanel supliers;
 	public LeftMenu_cach2() {
 		init();
 	}
@@ -36,7 +41,7 @@ public class LeftMenu_cach2 extends JPanel implements ActionListener, MouseListe
 		this.setPreferredSize(new Dimension(1280, 700));
 		this.setLayout(new BorderLayout());	
 		//Tao left menu
-		JPanel leftMenu = new JPanel(null);
+		leftMenu = new JPanel(null);
 		leftMenu.setBackground(Color.white);
 		leftMenu.setPreferredSize(new Dimension(250, 700));
 		//logo
@@ -106,8 +111,12 @@ public class LeftMenu_cach2 extends JPanel implements ActionListener, MouseListe
 		container.setPreferredSize(new Dimension(1280-250, 700));
 		
 		
-		
-		
+		orders = new OrdersPanel();
+		//orders.setVisible(false);
+		container.add(orders, BorderLayout.CENTER);
+		supliers = new SuplierPanel();
+		//supliers.setVisible(false);
+		container.add(supliers, BorderLayout.CENTER);
 		
 		
 		
@@ -123,14 +132,18 @@ public class LeftMenu_cach2 extends JPanel implements ActionListener, MouseListe
 		// TODO Auto-generated method stub
 		for(int i = 0; i < BtnText.length; i++) {
 			if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equalsIgnoreCase("Functionality1")) {
-				JPanel orders = new OrdersPanel();
-				container.add(orders, BorderLayout.CENTER);
-				container.revalidate();
+				//JPanel orders = new OrdersPanel();
+				//container.add(orders, BorderLayout.CENTER);
+				//container.revalidate();
+				orders.setVisible(true);
+				supliers.setVisible(false);
 			}
 			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equalsIgnoreCase("Functionality2")) {
-				JPanel supliers = new SuplierPanel();
-				container.add(supliers, BorderLayout.CENTER);
-				container.revalidate();
+				//JPanel supliers = new SuplierPanel();
+				//container.add(supliers, BorderLayout.CENTER);
+				//container.revalidate();
+				supliers.setVisible(true);
+				orders.setVisible(false);
 			}
 		}	
 	}
@@ -150,7 +163,7 @@ public class LeftMenu_cach2 extends JPanel implements ActionListener, MouseListe
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		 
 	}
 
 	@Override

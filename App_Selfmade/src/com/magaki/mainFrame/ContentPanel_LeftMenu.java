@@ -58,14 +58,14 @@ public class ContentPanel_LeftMenu extends JPanel implements ActionListener, Mou
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					for(int j = 0; j < BtnText.length; j++) {
-						if(funcBtn[j].getBackground().getRGB() == Color.LIGHT_GRAY.getRGB()) {
-							funcBtn[j].setBackground(Color.white);
+						if(funcBtn[j].getForeground().getRGB() == Color.ORANGE.getRGB()) {
+							funcBtn[j].setBackground(Color.black);
 							funcBtn[j].setEnabled(true);
 						}
 					}
 					for(int i = 0; i < BtnText.length; i++) {
 						if(e.getSource() == funcBtn[i]) {
-							funcBtn[i].setBackground(Color.LIGHT_GRAY);
+							funcBtn[i].setForeground(Color.ORANGE);
 							funcBtn[i].setEnabled(false);
 						}
 					}
@@ -106,9 +106,10 @@ public class ContentPanel_LeftMenu extends JPanel implements ActionListener, Mou
 		container.setPreferredSize(new Dimension(1280-250, 700));
 		JPanel orders = new OrdersPanel();
 		container.add(orders, "hello1");
-		JPanel products = new ProductsPanel();
-		container.add(products, "hello2");
-		
+		JPanel supliers = new SuplierPanel();
+		container.add(supliers, "hello2");
+		JPanel orders_detail = new Orders_OrderDetail();
+		container.add(orders_detail, "hello3");
 		
 		
 		
@@ -134,6 +135,9 @@ public class ContentPanel_LeftMenu extends JPanel implements ActionListener, Mou
 			}
 			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equalsIgnoreCase("Functionality2")) {
 				cardLayout.show(container, "hello2");
+			}
+			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equalsIgnoreCase("Functionality3")) {
+				cardLayout.show(container, "hello3");
 			}
 		}
 	}

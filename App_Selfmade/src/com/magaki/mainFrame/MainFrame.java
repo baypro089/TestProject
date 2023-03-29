@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
 		this.setUndecorated(true);
 		JPanel title = new TitlePanel(this);
 		// Content on the center
-		JPanel center = new LeftMenu_cach2();
+		JPanel center = new ContentPanel_LeftMenu();
 		
 		
 		
