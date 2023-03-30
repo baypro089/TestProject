@@ -110,8 +110,8 @@ public class ContentPanel_LeftMenu extends JPanel implements ActionListener, Mou
 		container.add(supliers, "hello2");
 		JPanel orders_detail = new Orders_OrderDetail();
 		container.add(orders_detail, "hello3");
-		
-		
+		JPanel ctpnPanel = new PhieuNhap_ctPNPanel();
+		container.add(ctpnPanel, "hello4");
 		
 		
 		
@@ -138,6 +138,9 @@ public class ContentPanel_LeftMenu extends JPanel implements ActionListener, Mou
 			}
 			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equalsIgnoreCase("Functionality3")) {
 				cardLayout.show(container, "hello3");
+			}
+			else if(e.getSource() == funcBtn[i] && funcBtn[i].getText().equalsIgnoreCase("Functionality4")) {
+				cardLayout.show(container, "hello4");
 			}
 		}
 	}

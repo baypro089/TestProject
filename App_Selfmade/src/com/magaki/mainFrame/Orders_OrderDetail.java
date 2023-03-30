@@ -59,6 +59,8 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	private JSeparator separator_3;
 	private JButton subFindBtn;
 	private JButton rmFindBtn;
+	private JButton turnToSelectedItemTableBtn;
+	private JButton backToDetailOrderTableBtn;
 	/**
 	 * Create the panel.
 	 */
@@ -124,21 +126,24 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 		
 		subFindBtn = new JButton("Tìm kiếm");
 		subFindBtn.setBounds(950, 9, 90, 35);
-		category.add(subFindBtn);
+		subFindBtn.addMouseListener(this);
 		subFindBtn.setForeground(new Color(255, 255, 255));
 		subFindBtn.setBackground(new Color(0, 102, 255));
 		subFindBtn.setFont(new Font("Arial", Font.BOLD, 13));
 		subFindBtn.setBorder(null);
 		subFindBtn.setFocusPainted(false);
+		category.add(subFindBtn);
+		
 		
 		rmFindBtn = new JButton("Hủy");
-		rmFindBtn.setBounds(950, 54, 90, 35);
-		category.add(rmFindBtn);
+		rmFindBtn.setBounds(950, 54, 90, 35);		
 		rmFindBtn.setForeground(new Color(255, 255, 255));
 		rmFindBtn.setBackground(new Color(0, 102, 255));
 		rmFindBtn.setFont(new Font("Arial", Font.BOLD, 13));
 		rmFindBtn.setBorder(null);
 		rmFindBtn.setFocusPainted(false);
+		rmFindBtn.addMouseListener(this);
+		category.add(rmFindBtn);
 		
 		vndSign1 = new JLabel("(VNĐ)");
 		vndSign1.setBounds(873, 36, 37, 30);
@@ -187,13 +192,13 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
         detailOrderScrollPane.setBounds(0, 0, 800, 360);
         deltailOrderPanel.add(detailOrderScrollPane);
         
-        JButton turnToSelectedItemTableBtn = new JButton("SELECT");
+        turnToSelectedItemTableBtn = new JButton(">>");
         turnToSelectedItemTableBtn.setFont(new Font("Tahoma", Font.BOLD, 11));
         turnToSelectedItemTableBtn.setForeground(new Color(0, 0, 0));
-        turnToSelectedItemTableBtn.setBackground(new Color(0, 102, 255));
         turnToSelectedItemTableBtn.setBorder(BorderFactory.createLineBorder(Color.black));
         turnToSelectedItemTableBtn.setFocusPainted(false);
         turnToSelectedItemTableBtn.setBackground(Color.LIGHT_GRAY);
+        turnToSelectedItemTableBtn.addMouseListener(this);
         detailOrderScrollPane.setRowHeaderView(turnToSelectedItemTableBtn);
         turnToSelectedItemTableBtn.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -283,6 +288,20 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
         itemSelectedScrollPane.setBounds(0, 0, 800, 360);
         selectItemPanel.add(itemSelectedScrollPane);
         
+        backToDetailOrderTableBtn = new JButton("<<");
+        itemSelectedScrollPane.setRowHeaderView(backToDetailOrderTableBtn);
+        backToDetailOrderTableBtn.setFont(new Font("Tahoma", Font.BOLD, 11));
+        backToDetailOrderTableBtn.setForeground(new Color(0, 0, 0));
+        backToDetailOrderTableBtn.setBorder(BorderFactory.createLineBorder(Color.black));       
+        backToDetailOrderTableBtn.setBackground(Color.LIGHT_GRAY);
+        backToDetailOrderTableBtn.addMouseListener(this);
+        backToDetailOrderTableBtn.setFocusPainted(false);
+        backToDetailOrderTableBtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		switchTable.show(switchPanel, "hello2");
+        	}
+        });
+        
         JPanel infoItemSeclected = new JPanel(null);
         infoItemSeclected.setBackground(new Color(255, 255, 255));
         infoItemSeclected.setBounds(800, 0, 280, 360);
@@ -348,17 +367,6 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
         thongtinHDLabel.setHorizontalAlignment(SwingConstants.CENTER);
         thongtinHDLabel.setBounds(80, 21, 126, 30);
         infoItemSeclected.add(thongtinHDLabel);
-        
-        JButton backToDetailOrderTableLabel = new JButton("BACK");
-        backToDetailOrderTableLabel.setFocusPainted(false);
-        backToDetailOrderTableLabel.setBackground(new Color(255, 255, 255));
-        backToDetailOrderTableLabel.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		switchTable.show(switchPanel, "hello2");
-        	}
-        });
-        backToDetailOrderTableLabel.setBounds(0, 0, 70, 23);
-        infoItemSeclected.add(backToDetailOrderTableLabel);
         
         separator_1 = new JSeparator();
         separator_1.setBounds(0, 359, 280, 1);
@@ -448,6 +456,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 		preBtn.setBackground(new Color(0, 102, 255));
 		preBtn.setBorder(null);
 		preBtn.setFocusPainted(false);
+		preBtn.addMouseListener(this);
 		btnField.add(preBtn);
 		
 		nextBtn = new JButton("Tiếp");
@@ -457,6 +466,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 		nextBtn.setBounds(910, 10, 100, 50);
 		nextBtn.setBorder(null);
 		nextBtn.setFocusPainted(false);
+		nextBtn.addMouseListener(this);
 		btnField.add(nextBtn);
 		
 		JSeparator separator = new JSeparator();
@@ -468,7 +478,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 		
 	}
 	
-	 class CheckboxRenderer extends JCheckBox implements TableCellRenderer {
+	class CheckboxRenderer extends JCheckBox implements TableCellRenderer {
 	        /**
 			 * 
 			 */
@@ -478,7 +488,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	            setSelected((value != null && ((Boolean) value).booleanValue()));
 	            return this;
 	        }
-	  }
+	 }
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -498,11 +508,46 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource() == nextBtn) {
+			nextBtn.setBackground(new Color(129, 178, 252));			
+		}
+		else if(e.getSource() == preBtn) {
+			preBtn.setBackground(new Color(129, 178, 252));			
+		}
+		else if(e.getSource() == subFindBtn) {
+			subFindBtn.setBackground(new Color(129, 178, 252));			
+		}
+		else if(e.getSource() == rmFindBtn) {
+			rmFindBtn.setBackground(new Color(129, 178, 252));			
+		}
+		else if(e.getSource() == turnToSelectedItemTableBtn) {
+			turnToSelectedItemTableBtn.setBackground(Color.white);			
+		}
+		else if(e.getSource() == backToDetailOrderTableBtn) {
+			backToDetailOrderTableBtn.setBackground(Color.white);			
+		}
 		
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource() == nextBtn) {
+			nextBtn.setBackground(new Color(0, 102, 255));			
+		}
+		else if(e.getSource() == preBtn) {
+			preBtn.setBackground(new Color(0, 102, 255));			
+		}
+		else if(e.getSource() == subFindBtn) {
+			subFindBtn.setBackground(new Color(0, 102, 255));			
+		}
+		else if(e.getSource() == rmFindBtn) {
+			rmFindBtn.setBackground(new Color(0, 102, 255));			
+		}
+		else if(e.getSource() == turnToSelectedItemTableBtn) {
+			turnToSelectedItemTableBtn.setBackground(Color.LIGHT_GRAY);			
+		}
+		else if(e.getSource() == backToDetailOrderTableBtn) {
+			backToDetailOrderTableBtn.setBackground(Color.LIGHT_GRAY);			
+		}
 	}
 }

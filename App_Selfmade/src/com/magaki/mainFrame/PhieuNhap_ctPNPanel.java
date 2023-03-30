@@ -48,6 +48,9 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 	private JButton subFindBtn;
 	private JButton rmFindBtn;
 	private JTextField idPN_CTPNLabelTxt;
+	private JButton addCtpnBtn;
+	private JButton fixCtpnBtn;
+	private JButton delCtpnBtn;
 	/**
 	 * Create the panel.
 	 */
@@ -118,6 +121,7 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 		subFindBtn.setBackground(new Color(0, 102, 255));
 		subFindBtn.setFont(new Font("Arial", Font.BOLD, 13));
 		subFindBtn.setBorder(null);
+		subFindBtn.addMouseListener(this);
 		subFindBtn.setFocusPainted(false);
 		
 		rmFindBtn = new JButton("Hủy");
@@ -128,6 +132,7 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 		rmFindBtn.setFont(new Font("Arial", Font.BOLD, 13));
 		rmFindBtn.setBorder(null);
 		rmFindBtn.setFocusPainted(false);
+		rmFindBtn.addMouseListener(this);
 		
 		vndSign1 = new JLabel("(VNĐ)");
 		vndSign1.setBounds(873, 36, 37, 30);
@@ -180,52 +185,52 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
         
         JLabel idCTPNLabel = new JLabel("Mã n.liệu");
         idCTPNLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        idCTPNLabel.setBounds(10, 132, 73, 30);
+        idCTPNLabel.setBounds(10, 104, 73, 30);
         infoDetailOrderPanel.add(idCTPNLabel);
         
         idCTPNTxt = new JTextField();
         idCTPNTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         idCTPNTxt.setColumns(10);
-        idCTPNTxt.setBounds(93, 132, 167, 30);
+        idCTPNTxt.setBounds(93, 104, 167, 30);
         infoDetailOrderPanel.add(idCTPNTxt);
         
         JLabel nameCTPNLabel = new JLabel("Tên n.liệu");
         nameCTPNLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        nameCTPNLabel.setBounds(10, 184, 73, 30);
+        nameCTPNLabel.setBounds(10, 156, 73, 30);
         infoDetailOrderPanel.add(nameCTPNLabel);
         
         nameCTPNTxt = new JTextField();
         nameCTPNTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         nameCTPNTxt.setColumns(10);
-        nameCTPNTxt.setBounds(93, 184, 167, 30);
+        nameCTPNTxt.setBounds(93, 156, 167, 30);
         infoDetailOrderPanel.add(nameCTPNTxt);
         
         JLabel soLuongNhapLabel = new JLabel("Số lượng nhập");
         soLuongNhapLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        soLuongNhapLabel.setBounds(10, 240, 140, 30);
+        soLuongNhapLabel.setBounds(10, 212, 140, 30);
         infoDetailOrderPanel.add(soLuongNhapLabel);
         
         soLuongNhapTxt = new JTextField();
         soLuongNhapTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         soLuongNhapTxt.setColumns(10);
-        soLuongNhapTxt.setBounds(210, 240, 50, 30);
+        soLuongNhapTxt.setBounds(210, 212, 50, 30);
         infoDetailOrderPanel.add(soLuongNhapTxt);
         
         JLabel priceCTPNLabel = new JLabel("Giá nhập");
         priceCTPNLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        priceCTPNLabel.setBounds(10, 292, 73, 30);
+        priceCTPNLabel.setBounds(10, 264, 73, 30);
         infoDetailOrderPanel.add(priceCTPNLabel);
         
         priceCTPNTxt = new JTextField();
         priceCTPNTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         priceCTPNTxt.setColumns(10);
-        priceCTPNTxt.setBounds(93, 292, 167, 30);
+        priceCTPNTxt.setBounds(93, 264, 167, 30);
         infoDetailOrderPanel.add(priceCTPNTxt);
         
         JLabel thongtinHDLabel_1 = new JLabel("THÔNG TIN NGUYÊN LIỆU");
         thongtinHDLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
         thongtinHDLabel_1.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 14));
-        thongtinHDLabel_1.setBounds(53, 22, 176, 30);
+        thongtinHDLabel_1.setBounds(53, 11, 176, 30);
         infoDetailOrderPanel.add(thongtinHDLabel_1);
         
         separator_3 = new JSeparator();
@@ -234,14 +239,44 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
         
         JLabel idPN_CTPNLabel = new JLabel("Mã n.liệu");
         idPN_CTPNLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        idPN_CTPNLabel.setBounds(10, 78, 73, 30);
+        idPN_CTPNLabel.setBounds(10, 50, 73, 30);
         infoDetailOrderPanel.add(idPN_CTPNLabel);
         
         idPN_CTPNLabelTxt = new JTextField();
         idPN_CTPNLabelTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         idPN_CTPNLabelTxt.setColumns(10);
-        idPN_CTPNLabelTxt.setBounds(93, 78, 167, 30);
+        idPN_CTPNLabelTxt.setBounds(93, 50, 167, 30);
         infoDetailOrderPanel.add(idPN_CTPNLabelTxt);
+        
+        addCtpnBtn = new JButton("Thêm");
+        addCtpnBtn.setForeground(Color.WHITE);
+        addCtpnBtn.setFont(new Font("Arial", Font.BOLD, 13));
+        addCtpnBtn.setFocusPainted(false);
+        addCtpnBtn.setBorder(null);
+        addCtpnBtn.setBackground(new Color(0, 102, 255));
+        addCtpnBtn.setBounds(10, 313, 75, 35);
+        addCtpnBtn.addMouseListener(this);
+        infoDetailOrderPanel.add(addCtpnBtn);
+        
+        fixCtpnBtn = new JButton("Cập nhật");
+        fixCtpnBtn.setForeground(Color.WHITE);
+        fixCtpnBtn.setFont(new Font("Arial", Font.BOLD, 13));
+        fixCtpnBtn.setFocusPainted(false);
+        fixCtpnBtn.setBorder(null);
+        fixCtpnBtn.setBackground(new Color(0, 102, 255));
+        fixCtpnBtn.setBounds(98, 313, 75, 35);
+        fixCtpnBtn.addMouseListener(this);
+        infoDetailOrderPanel.add(fixCtpnBtn);
+        
+        delCtpnBtn = new JButton("Xóa");
+        delCtpnBtn.setForeground(Color.WHITE);
+        delCtpnBtn.setFont(new Font("Arial", Font.BOLD, 13));
+        delCtpnBtn.setFocusPainted(false);
+        delCtpnBtn.setBorder(null);
+        delCtpnBtn.setBackground(new Color(0, 102, 255));
+        delCtpnBtn.setBounds(185, 313, 75, 35);
+        delCtpnBtn.addMouseListener(this);
+        infoDetailOrderPanel.add(delCtpnBtn);
    
         //End
         
@@ -328,6 +363,7 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 		preBtn.setBackground(new Color(0, 102, 255));
 		preBtn.setBorder(null);
 		preBtn.setFocusPainted(false);
+		preBtn.addMouseListener(this);
 		btnField.add(preBtn);
 		
 		nextBtn = new JButton("Tiếp");
@@ -337,6 +373,7 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 		nextBtn.setBounds(910, 10, 100, 50);
 		nextBtn.setBorder(null);
 		nextBtn.setFocusPainted(false);
+		nextBtn.addMouseListener(this);
 		btnField.add(nextBtn);
 		
 		JSeparator separator = new JSeparator();
@@ -378,11 +415,51 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource() == nextBtn) {
+			nextBtn.setBackground(new Color(129, 178, 252));			
+		}
+		else if(e.getSource() == preBtn) {
+			preBtn.setBackground(new Color(129, 178, 252));			
+		}
+		else if(e.getSource() == subFindBtn) {
+			subFindBtn.setBackground(new Color(129, 178, 252));			
+		}
+		else if(e.getSource() == rmFindBtn) {
+			rmFindBtn.setBackground(new Color(129, 178, 252));			
+		}	
+		else if(e.getSource() == addCtpnBtn) {
+			addCtpnBtn.setBackground(new Color(129, 178, 252));			
+		}
+		else if(e.getSource() == fixCtpnBtn) {
+			fixCtpnBtn.setBackground(new Color(129, 178, 252));			
+		}
+		else if(e.getSource() == delCtpnBtn) {
+			delCtpnBtn.setBackground(new Color(129, 178, 252));			
+		}
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource() == nextBtn) {
+			nextBtn.setBackground(new Color(0, 102, 255));			
+		}
+		else if(e.getSource() == preBtn) {
+			preBtn.setBackground(new Color(0, 102, 255));			
+		}
+		else if(e.getSource() == subFindBtn) {
+			subFindBtn.setBackground(new Color(0, 102, 255));			
+		}
+		else if(e.getSource() == rmFindBtn) {
+			rmFindBtn.setBackground(new Color(0, 102, 255));			
+		}		
+		else if(e.getSource() == addCtpnBtn) {
+			addCtpnBtn.setBackground(new Color(0, 102, 255));			
+		}
+		else if(e.getSource() == fixCtpnBtn) {
+			fixCtpnBtn.setBackground(new Color(0, 102, 255));			
+		}
+		else if(e.getSource() == delCtpnBtn) {
+			delCtpnBtn.setBackground(new Color(0, 102, 255));			
+		}
 	}
 }
