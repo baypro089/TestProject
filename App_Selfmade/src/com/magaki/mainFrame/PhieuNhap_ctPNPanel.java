@@ -3,6 +3,7 @@ package com.magaki.mainFrame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -51,6 +52,7 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 	private JButton addCtpnBtn;
 	private JButton fixCtpnBtn;
 	private JButton delCtpnBtn;
+	private DefaultTableCellRenderer centerRenderer;
 	/**
 	 * Create the panel.
 	 */
@@ -61,6 +63,8 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(1080, 700));
 		
+		centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
 		
 		//Tìm kiếm
 		category = new JPanel(null);
@@ -174,6 +178,19 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
         detailTableModel = new DefaultTableModel(new Object[]{"Mã phiếu nhập", "Mã nguyên liệu", "Tên nguyên liệu", "Số lượng nhập", "Giá"}, 0);		
         ctPNTable = new JTable(detailTableModel);
         
+        ctPNTable.setDefaultRenderer(String.class, centerRenderer);
+	    ctPNTable.setRowHeight(30);
+	    for(int i = 0; i < 5; i++) {
+	    	if(i == 2) {
+	    		ctPNTable.getColumnModel().getColumn(i).setPreferredWidth(300);
+	    		ctPNTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    	}
+	    	else {
+	    		ctPNTable.getColumnModel().getColumn(i).setPreferredWidth(125);
+	    		ctPNTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    	}
+	    }
+	    
         ctpnScrollPane = new JScrollPane(ctPNTable);
         ctpnScrollPane.setBounds(0, 0, 800, 360);
         deltailOrderPanel.add(ctpnScrollPane);
