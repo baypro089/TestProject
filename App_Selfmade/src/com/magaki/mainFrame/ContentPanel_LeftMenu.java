@@ -104,10 +104,7 @@ public class ContentPanel_LeftMenu extends JPanel implements ActionListener, Mou
 		//Tao CardLayout Panel
 		container = new JPanel(cardLayout);
 		container.setPreferredSize(new Dimension(1280-250, 700));
-		JPanel orders = new OrdersPanel();
-		container.add(orders, "hello1");
-		JPanel supliers = new SuplierPanel();
-		container.add(supliers, "hello2");
+		
 		JPanel orders_detail = new Orders_OrderDetail();
 		container.add(orders_detail, "hello3");
 		JPanel ctpnPanel = new PhieuNhap_ctPNPanel();

@@ -2,9 +2,11 @@ package com.magaki.mainFrame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import java.awt.*;
 
@@ -61,6 +63,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	private JButton rmFindBtn;
 	private JButton turnToSelectedItemTableBtn;
 	private JButton backToDetailOrderTableBtn;
+	private DefaultTableCellRenderer centerRenderer;
 	/**
 	 * Create the panel.
 	 */
@@ -71,7 +74,8 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(1080, 700));
 		
-		
+		centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
 		//Tìm kiếm
 		category = new JPanel(null);
 		category.setPreferredSize(new Dimension(1080, 100));
@@ -187,6 +191,19 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
         
         detailTableModel = new DefaultTableModel(new Object[]{"Mã đơn", "Mã món", "Tên món", "Số lượng mua", "Giá"}, 0);		
         detailOrdersTable = new JTable(detailTableModel);
+        detailOrdersTable.setFont(new Font("Tahoma", Font.PLAIN, 11));
+	    detailOrdersTable.setDefaultRenderer(String.class, centerRenderer);
+	    detailOrdersTable.setRowHeight(30);
+	    for(int i = 0; i < 5; i++) {
+	    	if(i == 2) {
+	    		detailOrdersTable.getColumnModel().getColumn(i).setPreferredWidth(300);
+	    		detailOrdersTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    	}
+	    	else {
+	    		detailOrdersTable.getColumnModel().getColumn(i).setPreferredWidth(125);
+	    		detailOrdersTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    	}
+	    }
         
         detailOrderScrollPane = new JScrollPane(detailOrdersTable);
         detailOrderScrollPane.setBounds(0, 0, 800, 360);
@@ -267,15 +284,32 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
         //End
 	    
         //Panel Chọn món
-        selectItemPanel = new JPanel(null);
+        selectItemPanel = new JPanel(new BorderLayout());
         switchPanel.add(selectItemPanel, "hello1");
               
         model = new DefaultTableModel(new Object[]{"Mã món", "Tên món", "Số lượng còn lại", "Giá", "Chọn"}, 0);		
-        ordersSelectedTable = new JTable(model);
+        ordersSelectedTable = new JTable(model);   
+	    ordersSelectedTable.setDefaultRenderer(String.class, centerRenderer);
+        ordersSelectedTable.setRowHeight(30);
+        
         model.addRow(new Object[]{"C1", "Cơm sườn", 10, 30000, false});
 	    model.addRow(new Object[]{"C2", "Cơm gà", 1, 30000, false});
 	    model.addRow(new Object[]{"C3", "Cơm chiên", 1, 30000, false});
 	    model.addRow(new Object[]{"C4", "Cơm trộn", 1, 30000, false});
+	    for(int i = 0; i < 5; i++) {
+	    	if(i == 1) {
+	    		ordersSelectedTable.getColumnModel().getColumn(i).setPreferredWidth(300);
+	    		ordersSelectedTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    	}
+	    	else {
+	    		ordersSelectedTable.getColumnModel().getColumn(i).setPreferredWidth(125);
+	    		ordersSelectedTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+	    	}
+	    }
+	    
+	    
+	    
+	    
 	    
         JCheckBox selection = new JCheckBox();
         TableColumn selectColumn = ordersSelectedTable.getColumnModel().getColumn(4);
@@ -285,8 +319,8 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
         
         
         itemSelectedScrollPane = new JScrollPane(ordersSelectedTable);
-        itemSelectedScrollPane.setBounds(0, 0, 800, 360);
-        selectItemPanel.add(itemSelectedScrollPane);
+        itemSelectedScrollPane.setPreferredSize(new Dimension(800, 360));
+        selectItemPanel.add(itemSelectedScrollPane, BorderLayout.WEST);
         
         backToDetailOrderTableBtn = new JButton("<<");
         itemSelectedScrollPane.setRowHeaderView(backToDetailOrderTableBtn);
@@ -304,8 +338,8 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
         
         JPanel infoItemSeclected = new JPanel(null);
         infoItemSeclected.setBackground(new Color(255, 255, 255));
-        infoItemSeclected.setBounds(800, 0, 280, 360);
-        selectItemPanel.add(infoItemSeclected);
+        infoItemSeclected.setPreferredSize(new Dimension(280, 360));
+        selectItemPanel.add(infoItemSeclected, BorderLayout.EAST);
         
         JLabel idItemSelectedLabel = new JLabel("Mã món");
         idItemSelectedLabel.setFont(new Font("Arial", Font.BOLD, 13));
@@ -488,6 +522,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	            setSelected((value != null && ((Boolean) value).booleanValue()));
 	            return this;
 	        }
+			
 	 }
 
 	@Override
@@ -549,5 +584,14 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 		else if(e.getSource() == backToDetailOrderTableBtn) {
 			backToDetailOrderTableBtn.setBackground(Color.LIGHT_GRAY);			
 		}
+	}
+	public static void setColumnWidths(JTable table, int... widths) {
+	    TableColumnModel columnModel = table.getColumnModel();
+	    for (int i = 0; i < widths.length; i++) {
+	        if (i < columnModel.getColumnCount()) {
+	            columnModel.getColumn(i).setMaxWidth(widths[i]);
+	        }
+	        else break;
+	    }
 	}
 }
