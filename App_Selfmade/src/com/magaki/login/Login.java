@@ -39,7 +39,7 @@ public class Login extends JFrame implements ActionListener{
 	}
 	public void init() {
 		this.setTitle("Login");      
-		this.setLayout(null);	
+		getContentPane().setLayout(null);	
 		this.setResizable(false);
 		//this.setUndecorated(true);
 		//Logo
@@ -55,7 +55,7 @@ public class Login extends JFrame implements ActionListener{
 		// Be wraped login
 		inside_wrap = new JPanel();
 		inside_wrap.setLayout(null);
-		inside_wrap.setBounds(50, 140, 300, 340);
+		inside_wrap.setBounds(50, 140, 300, 400);
 		inside_wrap.setBackground(Color.WHITE);
 		// Login label
 		JLabel loginLabel = new JLabel();
@@ -119,7 +119,7 @@ public class Login extends JFrame implements ActionListener{
 		// Login button
 		loginBtn = new RoundedBorderBtn("GO!");
 		loginBtn.setFont(userFont);
-		loginBtn.setBounds(80, 260, 120, 60);
+		loginBtn.setBounds(89, 306, 120, 60);
 		loginBtn.setBackground(new Color(255, 204, 153));
 		loginBtn.setBorder(null);
 		loginBtn.setFocusPainted(false);
@@ -165,8 +165,8 @@ public class Login extends JFrame implements ActionListener{
 		windowBtn.add(title, BorderLayout.NORTH);
 		//End thanh tieu de	
 		
-		this.add(windowBtn);
-		this.add(loginField);
+		getContentPane().add(windowBtn);
+		getContentPane().add(loginField);
 		this.setFocusable(true);
         this.requestFocusInWindow();
 		this.setSize(400, 620);
