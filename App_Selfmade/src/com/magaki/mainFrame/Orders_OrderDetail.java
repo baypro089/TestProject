@@ -2,6 +2,8 @@ package com.magaki.mainFrame;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -12,11 +14,14 @@ import java.awt.*;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
 
-public class Orders_OrderDetail extends JPanel implements MouseListener{
+public class Orders_OrderDetail extends JPanel implements MouseListener, ActionListener, ItemListener{
 
 	/**
 	 * 
@@ -52,7 +57,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	private JTable detailOrdersTable;
 	private DefaultTableModel detailTableModel;
 	private JScrollPane detailOrderScrollPane;
-	private JTextField idDetailOrderLabelTxt;
+	private JTextField idDetailOrderTxt;
 	private JTextField nameDetailOrderTxt;
 	private JTextField soLuongMuaTxt;
 	private JTextField priceDetailOrderTxt;
@@ -64,6 +69,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	private JButton turnToSelectedItemTableBtn;
 	private JButton backToDetailOrderTableBtn;
 	private DefaultTableCellRenderer centerRenderer;
+	private JCheckBox selection;
 	/**
 	 * Create the panel.
 	 */
@@ -204,7 +210,16 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	    		detailOrdersTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 	    	}
 	    }
-        
+	    detailOrdersTable.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		int row = ordersSelectedTable.getSelectedRow();
+        		idDetailOrderTxt.setText(detailTableModel.getValueAt(row, 0).toString());        		
+        		nameDetailOrderTxt.setText(detailTableModel.getValueAt(row, 1).toString());
+        		soLuongMuaTxt.setText(detailTableModel.getValueAt(row, 2).toString());
+        		priceDetailOrderTxt.setText(detailTableModel.getValueAt(row, 3).toString());
+        	}
+        });
         detailOrderScrollPane = new JScrollPane(detailOrdersTable);
         detailOrderScrollPane.setBounds(0, 0, 800, 360);
         deltailOrderPanel.add(detailOrderScrollPane);
@@ -233,11 +248,11 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
         idDetailOrderLabel.setBounds(10, 80, 73, 30);
         infoDetailOrderPanel.add(idDetailOrderLabel);
         
-        idDetailOrderLabelTxt = new JTextField();
-        idDetailOrderLabelTxt.setFont(new Font("Arial", Font.PLAIN, 13));
-        idDetailOrderLabelTxt.setColumns(10);
-        idDetailOrderLabelTxt.setBounds(93, 80, 167, 30);
-        infoDetailOrderPanel.add(idDetailOrderLabelTxt);
+        idDetailOrderTxt = new JTextField();
+        idDetailOrderTxt.setFont(new Font("Arial", Font.PLAIN, 13));
+        idDetailOrderTxt.setColumns(10);
+        idDetailOrderTxt.setBounds(93, 80, 167, 30);
+        infoDetailOrderPanel.add(idDetailOrderTxt);
         
         JLabel nameDetailOrderLabel = new JLabel("Tên món");
         nameDetailOrderLabel.setFont(new Font("Arial", Font.BOLD, 13));
@@ -289,6 +304,32 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
               
         model = new DefaultTableModel(new Object[]{"Mã món", "Tên món", "Số lượng còn lại", "Giá", "Chọn"}, 0);		
         ordersSelectedTable = new JTable(model);   
+       
+      /*  ordersSelectedTable.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		int row = ordersSelectedTable.getSelectedRow();
+        		idItemSelectedTxt.setText(model.getValueAt(row, 0).toString());
+        		nameItemSelectedTxt.setText(model.getValueAt(row, 1).toString());
+        		remainItemSelectedTxt.setText(model.getValueAt(row, 2).toString());
+        		priceItemSelectedTxt.setText(model.getValueAt(row, 3).toString());
+        		
+        	}
+        });*/
+        ListSelectionModel listSelectionModel = ordersSelectedTable.getSelectionModel();
+        listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listSelectionModel.addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+            	int row = ordersSelectedTable.getSelectedRow();
+        		idItemSelectedTxt.setText(model.getValueAt(row, 0).toString());
+        		nameItemSelectedTxt.setText(model.getValueAt(row, 1).toString());
+        		remainItemSelectedTxt.setText(model.getValueAt(row, 2).toString());
+        		priceItemSelectedTxt.setText(model.getValueAt(row, 3).toString());
+        		
+            }          
+        });
+        
 	    ordersSelectedTable.setDefaultRenderer(String.class, centerRenderer);
         ordersSelectedTable.setRowHeight(30);
         
@@ -306,19 +347,18 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	    		ordersSelectedTable.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
 	    	}
 	    }
+    
 	    
-	    
-	    
-	    
-	    
-        JCheckBox selection = new JCheckBox();
         TableColumn selectColumn = ordersSelectedTable.getColumnModel().getColumn(4);
-        //tick.addItemListener(this);
-        selectColumn.setCellEditor(new DefaultCellEditor(selection));
+        selection = new JCheckBox();
+    	selection.addItemListener(this);
+    	selectColumn.setCellEditor(new DefaultCellEditor(selection));
         selectColumn.setCellRenderer(new CheckboxRenderer());
         
         
+        
         itemSelectedScrollPane = new JScrollPane(ordersSelectedTable);
+        
         itemSelectedScrollPane.setPreferredSize(new Dimension(800, 360));
         selectItemPanel.add(itemSelectedScrollPane, BorderLayout.WEST);
         
@@ -383,6 +423,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
         amountInputItemSelectedTxt.setFont(new Font("Arial", Font.PLAIN, 13));
         amountInputItemSelectedTxt.setColumns(10);
         amountInputItemSelectedTxt.setBounds(210, 239, 50, 30);
+        amountInputItemSelectedTxt.setEnabled(false);
         infoItemSeclected.add(amountInputItemSelectedTxt);
         
         JLabel priceItemSelectedLabel = new JLabel("Giá");
@@ -491,6 +532,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 		preBtn.setBorder(null);
 		preBtn.setFocusPainted(false);
 		preBtn.addMouseListener(this);
+		preBtn.addActionListener(this);
 		btnField.add(preBtn);
 		
 		nextBtn = new JButton("Tiếp");
@@ -501,6 +543,7 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 		nextBtn.setBorder(null);
 		nextBtn.setFocusPainted(false);
 		nextBtn.addMouseListener(this);
+		nextBtn.addActionListener(this);
 		btnField.add(nextBtn);
 		
 		JSeparator separator = new JSeparator();
@@ -593,5 +636,43 @@ public class Orders_OrderDetail extends JPanel implements MouseListener{
 	        }
 	        else break;
 	    }
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == nextBtn) {
+			if(idOrderTxt.getText().equals("") || unknownTxt.getText().equals("") || totalPriceOrderTxt.getText().equals("") 
+					|| idStaffCreateOrderTxt.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Thong tin chua day du!!!", "Quan com java", JOptionPane.WARNING_MESSAGE);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Tao don thanh cong!!!", "Quan com java", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		if(e.getSource() == preBtn) {
+			if(!idOrderTxt.getText().equals("") || !unknownTxt.getText().equals("") || !totalPriceOrderTxt.getText().equals("")
+					|| !idStaffCreateOrderTxt.getText().equals("")) {
+				JOptionPane.showConfirmDialog(null, "Mot so du lieu van chua duoc luu, ban co muon quay lai?", "Quan com java", JOptionPane.YES_NO_OPTION);
+			}
+		}
+		
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == selection && selection.isSelected()) {
+			String input;
+			do {
+				input = JOptionPane.showInputDialog("Nhap so luong mon");							
+				if(input == null) {
+					selection.setSelected(false);	
+					break;
+				}
+			}while(input.equals(""));	
+			amountInputItemSelectedTxt.setText(input);
+		}
+		else {				
+			amountInputItemSelectedTxt.setText("");
+		}		
 	}
 }

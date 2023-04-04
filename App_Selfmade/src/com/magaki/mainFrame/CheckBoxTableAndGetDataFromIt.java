@@ -76,7 +76,7 @@ public class CheckBoxTableAndGetDataFromIt extends JFrame implements ItemListene
 			for (int i = 0; i < table.getColumnCount(); i++) {
 			    rowData[i] = table.getValueAt(modelRow, i); // Lấy giá trị của ô tại hàng và cột được chỉ định và thêm vào mảng rowData
 			}
-			Person anhA = new Person(rowData[0].toString(), rowData[1].toString(), rowData[2].toString());
+			//Person anhA = new Person(rowData[0].toString(), rowData[1].toString(), rowData[2].toString());
 			System.out.println(anhA.toString());
 			// Chuyển đổi mảng rowData sang chuỗi và trả về dòng chứa ô đó
 			//String rowString = Arrays.toString(rowData);

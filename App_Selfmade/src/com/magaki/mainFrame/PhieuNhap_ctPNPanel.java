@@ -12,11 +12,12 @@ import java.awt.*;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 
-public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
+public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener, ActionListener{
 
 	/**
 	 * 
@@ -177,7 +178,17 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
         
         detailTableModel = new DefaultTableModel(new Object[]{"Mã phiếu nhập", "Mã nguyên liệu", "Tên nguyên liệu", "Số lượng nhập", "Giá"}, 0);		
         ctPNTable = new JTable(detailTableModel);
-        
+        ctPNTable.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent e) {
+        		int row = ctPNTable.getSelectedRow();
+        		idPN_CTPNLabelTxt.setText(detailTableModel.getValueAt(row, 0).toString());        		
+        		idCTPNTxt.setText(detailTableModel.getValueAt(row, 1).toString());
+        		nameCTPNTxt.setText(detailTableModel.getValueAt(row, 2).toString());
+        		soLuongNhapTxt.setText(detailTableModel.getValueAt(row, 3).toString());
+        		priceCTPNTxt.setText(detailTableModel.getValueAt(row, 4).toString());
+        	}
+        });
         ctPNTable.setDefaultRenderer(String.class, centerRenderer);
 	    ctPNTable.setRowHeight(30);
 	    for(int i = 0; i < 5; i++) {
@@ -273,6 +284,7 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
         addCtpnBtn.setBackground(new Color(0, 102, 255));
         addCtpnBtn.setBounds(10, 313, 75, 35);
         addCtpnBtn.addMouseListener(this);
+        addCtpnBtn.addActionListener(this);
         infoDetailOrderPanel.add(addCtpnBtn);
         
         fixCtpnBtn = new JButton("Cập nhật");
@@ -293,6 +305,7 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
         delCtpnBtn.setBackground(new Color(0, 102, 255));
         delCtpnBtn.setBounds(185, 313, 75, 35);
         delCtpnBtn.addMouseListener(this);
+        delCtpnBtn.addActionListener(this);
         infoDetailOrderPanel.add(delCtpnBtn);
    
         //End
@@ -391,6 +404,8 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 		nextBtn.setBorder(null);
 		nextBtn.setFocusPainted(false);
 		nextBtn.addMouseListener(this);
+		nextBtn.addActionListener(this);
+		nextBtn.addActionListener(this);
 		btnField.add(nextBtn);
 		
 		JSeparator separator = new JSeparator();
@@ -477,6 +492,35 @@ public class PhieuNhap_ctPNPanel extends JPanel implements MouseListener{
 		}
 		else if(e.getSource() == delCtpnBtn) {
 			delCtpnBtn.setBackground(new Color(0, 102, 255));			
+		}
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == nextBtn) {
+			if(idPNTxt.getText().equals("") || idNCCTxt.getText().equals("") || totalPricePNTxt.getText().equals("") 
+					|| idStaffCreatePNTxt.getText().equals("") || soLuongNhapTxt.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Thong tin chua day du!!!", "Quan com java", JOptionPane.WARNING_MESSAGE);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Tao phieu nhap thanh cong!!!", "Quan com java", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		if(e.getSource() == preBtn) {
+			if(!idPNTxt.getText().equals("") || !idNCCTxt.getText().equals("") || !totalPricePNTxt.getText().equals("")
+					|| !idStaffCreatePNTxt.getText().equals("") || !soLuongNhapTxt.getText().equals("")) {
+				JOptionPane.showConfirmDialog(null, "Mot so du lieu van chua duoc luu, ban co muon quay lai?", "Quan com java", JOptionPane.YES_NO_OPTION);
+			}
+		}
+		if(e.getSource() == addCtpnBtn) {
+			JOptionPane.showMessageDialog(null, "Them thanh cong!", "Quan com java", JOptionPane.PLAIN_MESSAGE);
+		}
+		if(e.getSource() == delCtpnBtn) {
+			int selection = JOptionPane.showConfirmDialog(null, "Xac nhan ban muon xoa?", "Quan com java", JOptionPane.YES_NO_OPTION);
+			if(selection == 0) {
+				//co
+				JOptionPane.showMessageDialog(null, "Xoa thanh cong!", "Quan com java", JOptionPane.PLAIN_MESSAGE);
+			}
 		}
 	}
 }
